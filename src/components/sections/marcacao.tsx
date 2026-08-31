@@ -4,39 +4,42 @@ import { useState } from "react";
 
 import { RevealText, RevealBlock } from "@/components/motion/reveal";
 import { SurfaceFill } from "@/components/ui/surface";
-import { brand } from "@/lib/content";
 
 /**
- * Bloco de marcação — versão de demonstração.
+ * Booking block — demonstration only.
  *
- * Não guarda nada nem tem backend: valida no browser, mostra a confirmação
- * e abre o WhatsApp da clínica com a mensagem já escrita. Serve para a
- * cliente ver a experiência antes de decidir. Quando fechar, troca-se o
- * `abrirWhatsApp` por uma server action que grave numa base de dados — o
- * resto do componente fica igual.
+ * It stores nothing and has no backend: it validates in the browser and
+ * shows the confirmation state, so a visitor can walk the whole flow. It
+ * deliberately does NOT dial out or send anything, because the clinic is
+ * fictional and the number is a reserved fictional one — a form that
+ * pretended to reach somebody would be the one dishonest thing on the page.
  *
- * Feito com estado de React e validação nativa do HTML, de propósito: este
- * site não tem react-hook-form nem zod, e instalar cinco dependências para
- * um formulário de cinco campos era peso a mais.
+ * To make it real, swap `submeter` for a server action that writes to a
+ * database. The rest of the component stays as it is.
+ *
+ * Built on React state and native HTML validation on purpose: this site has
+ * neither react-hook-form nor zod, and pulling in five dependencies for a
+ * five-field form was weight it did not need.
  */
 
 const SERVICOS = [
-  "Consulta de avaliação",
-  "Toxina Botulínica",
-  "Preenchimentos",
-  "Morpheus8",
-  "HIFU",
-  "Laser",
-  "Lipoenzimática",
-  "Drenagem Linfática",
-  "Outro (digo na consulta)",
+  "Consultation",
+  "Neuromodulators",
+  "Dermal Fillers",
+  "RF Microneedling",
+  "Ultrasound Lifting",
+  "Laser Treatments",
+  "Medical Weight Loss",
+  "Body Contouring",
+  "Something else (I will explain)",
 ] as const;
 
-// Terça a sexta 09:30—19:30, sábado 09:30—14:30 (ver brand.hours). Meias
-// horas dariam uma lista longa demais para um select de telemóvel.
+// Monday to Friday 9:00 AM — 7:00 PM (see brand.hours). Half-hour slots
+// would make the list too long for a phone select.
 const HORAS = [
-  "09:30", "10:00", "11:00", "12:00", "14:00",
-  "15:00", "16:00", "17:00", "18:00", "19:00",
+  "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+  "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM",
+  "5:00 PM", "6:00 PM",
 ] as const;
 
 type Dados = {
@@ -55,20 +58,11 @@ const VAZIO: Dados = {
   telefone: "",
 };
 
-function mensagemWhatsApp(d: Dados) {
-  const linhas = [
-    `Olá! Queria marcar: ${d.servico}`,
-    `Dia ${formatarData(d.dia)} às ${d.hora}`,
-    `Nome: ${d.nome}`,
-    d.telefone ? `Telefone: ${d.telefone}` : null,
-  ].filter(Boolean);
-  return linhas.join("\n");
-}
-
 function formatarData(iso: string) {
   if (!iso) return "";
   const [ano, mes, dia] = iso.split("-");
-  return `${dia}/${mes}/${ano}`;
+  // US order: month before day.
+  return `${mes}/${dia}/${ano}`;
 }
 
 export function Marcacao() {
@@ -84,13 +78,8 @@ export function Marcacao() {
 
   function submeter(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
+    // Nothing leaves the browser: see the note at the top of the file.
     setEnviado(true);
-    // Abre numa aba nova para não tirar a cliente do site.
-    window.open(
-      `${brand.whatsapp}?text=${encodeURIComponent(mensagemWhatsApp(dados))}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
   }
 
   return (
@@ -109,7 +98,7 @@ export function Marcacao() {
           conteúdo novo. */}
       <div className="gutter relative py-section">
         <div className="mx-auto w-full max-w-[64rem]">
-        <p className="label mb-8 text-fundo/70">Marcação</p>
+        <p className="label mb-8 text-fundo/70">Booking</p>
 
         <RevealText
           as="h2"
@@ -134,7 +123,7 @@ export function Marcacao() {
               className="w-full border border-fundo/12 bg-bordo-fundo/60 p-8 backdrop-blur-sm sm:p-12"
             >
               <div className="grid gap-8 sm:grid-cols-2">
-                <Campo label="Serviço" className="sm:col-span-2">
+                <Campo label="Service" className="sm:col-span-2">
                   <select
                     required
                     value={dados.servico}
@@ -149,7 +138,7 @@ export function Marcacao() {
                   </select>
                 </Campo>
 
-                <Campo label="Dia">
+                <Campo label="Date">
                   <input
                     required
                     type="date"
@@ -160,7 +149,7 @@ export function Marcacao() {
                   />
                 </Campo>
 
-                <Campo label="Hora">
+                <Campo label="Time">
                   <select required value={dados.hora} onChange={alterar("hora")} className={CAMPO}>
                     <option value="" className="bg-bordo-fundo text-fundo/50">
                       Escolher hora
@@ -173,22 +162,22 @@ export function Marcacao() {
                   </select>
                 </Campo>
 
-                <Campo label="Nome">
+                <Campo label="Name">
                   <input
                     required
                     minLength={2}
                     type="text"
-                    placeholder="O seu nome"
+                    placeholder="Your name"
                     value={dados.nome}
                     onChange={alterar("nome")}
                     className={CAMPO}
                   />
                 </Campo>
 
-                <Campo label="Telefone (opcional)">
+                <Campo label="Phone (optional)">
                   <input
                     type="tel"
-                    placeholder="+351 ..."
+                    placeholder="(305) 555-0142"
                     value={dados.telefone}
                     onChange={alterar("telefone")}
                     className={CAMPO}
@@ -202,9 +191,9 @@ export function Marcacao() {
                   type="submit"
                   className="label ouro-vivo rounded-full px-8 py-4 transition-shadow duration-500 hover:shadow-[0_0_40px_-12px_var(--color-ouro)]"
                 >
-                  Confirmar marcação
+                  Confirm booking
                 </button>
-                <p className="label text-fundo/40">Resposta no próprio dia</p>
+                <p className="label text-fundo/40">Same-day response</p>
               </div>
             </form>
           )}
@@ -227,15 +216,15 @@ function Confirmacao({ dados, aoRecomecar }: { dados: Dados; aoRecomecar: () => 
         </svg>
       </span>
 
-      <h3 className="mb-6 text-[length:var(--text-sub)]">Pedido enviado</h3>
+      <h3 className="mb-6 text-[length:var(--text-sub)]">Request received</h3>
 
       <p className="mx-auto mb-10 max-w-[46ch] text-[length:var(--text-lead)] leading-[1.62] text-fundo/70">
-        Obrigada, {dados.nome}. Abrimos o WhatsApp com o seu pedido de {dados.servico} para{" "}
-        {formatarData(dados.dia)} às {dados.hora}. Confirmamos consigo no próprio dia.
+        Thank you, {dados.nome}. We have your request for {dados.servico} on{" "}
+        {formatarData(dados.dia)} at {dados.hora}, and we will confirm with you the same day.
       </p>
 
       <button type="button" onClick={aoRecomecar} className="label text-fundo/70 hover:text-fundo">
-        Fazer outra marcação
+        Make another booking
       </button>
     </div>
   );

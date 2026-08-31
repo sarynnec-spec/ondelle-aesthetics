@@ -23,35 +23,41 @@ const sans = Inter({
   display: "swap",
 });
 
-/** Salvaguarda: só indexa quando a clínica aprovar. */
+/**
+ * Stays out of search by default, and should stay that way.
+ *
+ * This is a fictional clinic with structured data that describes a business
+ * at a Miami location. Indexed, it would show up in search looking like a
+ * real med spa, which is exactly the confusion the whole build is designed
+ * to avoid. It is a portfolio piece: it gets visited because somebody was
+ * sent the link, not because it ranked.
+ */
 const indexavel = process.env.SITE_INDEXAVEL === "1";
 
 const description =
-  "Clínica de medicina estética e cirurgia plástica em Rio Tinto, Porto. Protocolos personalizados de medicina estética, tecnologia e acompanhamento clínico, com avaliação antes de qualquer tratamento.";
+  "A fictional med spa website, built as a design demonstration. Advanced aesthetics in Miami: injectables, RF microneedling, laser, body contouring and physician-supervised weight management.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(brand.url),
   title: {
-    default: `${brand.name} — Clínica de Estética Avançada em ${brand.city}`,
+    default: `${brand.name} — Advanced Aesthetic Medicine in ${brand.city}`,
     template: `%s · ${brand.name}`,
   },
   description,
   keywords: [
-    "clínica de medicina estética",
-    "cirurgia plástica Porto",
-    "medicina estética Rio Tinto",
-    "estética avançada Porto",
-    "Morpheus8",
-    "HIFU",
-    "IPL",
-    "depilação a laser",
-    "preenchimentos",
-    "toxina botulínica",
+    "med spa website template",
+    "aesthetic clinic web design",
+    "medical spa Miami",
+    "RF microneedling",
+    "dermal fillers",
+    "laser hair removal",
+    "body contouring",
+    "medical weight loss",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    locale: "pt_PT",
+    locale: "en_US",
     url: brand.url,
     siteName: brand.name,
     title: `${brand.name} — ${brand.tagline}`,
@@ -62,10 +68,7 @@ export const metadata: Metadata = {
     title: `${brand.name} — ${brand.tagline}`,
     description,
   },
-  // Enquanto for uma proposta por aprovar, não pode ser indexada: traz o
-  // nome, a morada, o telefone e a direção clínica reais, e apareceria no
-  // Google a competir com o site oficial da clínica.
-  // Ligar só depois do OK da cliente: SITE_INDEXAVEL=1
+  // Leave this off. See the note on `indexavel` above.
   robots: indexavel
     ? { index: true, follow: true }
     : { index: false, follow: false, nocache: true },
@@ -82,7 +85,7 @@ const jsonLd = {
   name: brand.full,
   description,
   url: brand.url,
-  telephone: `+351${brand.phone.replace(/\s/g, "")}`,
+  telephone: brand.booking.replace("tel:", ""),
   email: brand.email,
   sameAs: [brand.instagram.url],
   address: {
@@ -95,15 +98,15 @@ const jsonLd = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:30",
-      closes: "19:30",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "19:00",
     },
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: "Saturday",
-      opens: "09:30",
-      closes: "14:30",
+      opens: "10:00",
+      closes: "16:00",
     },
   ],
 };
@@ -112,13 +115,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-PT" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en-US" className={`${display.variable} ${sans.variable}`}>
       <body className="antialiased">
         <a
           href="#introducao"
           className="label sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-bordo focus:px-5 focus:py-3 focus:text-fundo"
         >
-          Saltar para o conteúdo
+          Skip to content
         </a>
 
         <Preloader />

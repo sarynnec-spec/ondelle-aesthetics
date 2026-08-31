@@ -13,12 +13,12 @@ import { hero, brand } from "@/lib/content";
 export function Hero() {
   return (
     <>
-      <section id="inicio" aria-label="Início" className="relative h-svh w-full overflow-hidden bg-bordo">
+      <section id="inicio" aria-label="Home" className="relative h-svh w-full overflow-hidden bg-bordo">
         {/* O vídeo começa abaixo da faixa do cabeçalho, nos dois formatos.
             A mesma variável alimenta a faixa e este recuo. */}
         <div className="absolute inset-0 top-[var(--altura-cabecalho)]">
           {hero.video ? (
-            <HeroVideo desktop={hero.video} mobile={hero.videoMobile} />
+            <HeroVideo desktop={hero.video} mobile={hero.videoMobile ?? hero.video} />
           ) : null}
         </div>
 
@@ -33,7 +33,7 @@ export function Hero() {
       </section>
 
       {/* O texto que estava sobre o vídeo. */}
-      <section aria-label="Apresentação" className="relative bg-bordo text-fundo">
+      <section aria-label="Introduction" className="relative bg-bordo text-fundo">
         <div className="gutter flex min-h-svh flex-col justify-center py-section">
           {/* Colunas iguais. A partir de `lg` o texto vai todo para a segunda,
               porque a fotografia ocupa a esquerda: duas fotografias seguidas
@@ -128,8 +128,8 @@ export function Hero() {
             <div className="pointer-events-none flex justify-center max-lg:-mx-gutter max-lg:-mb-section lg:absolute lg:top-[7%] lg:bottom-0 lg:right-[38%] lg:left-0 lg:block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/imagens/nova.webp.png"
-                alt="Protocolo estético"
+                src="/imagens/placeholder/hero-figura.jpg"
+                alt=""
                 className="h-auto w-full max-w-[26rem] object-contain object-bottom md:max-w-[30rem] lg:h-full lg:max-w-none lg:-scale-x-100 lg:[object-position:100%_100%]"              />
             </div>
           </div>

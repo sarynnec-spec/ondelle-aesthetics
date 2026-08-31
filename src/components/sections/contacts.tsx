@@ -61,10 +61,10 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
             className="-mt-[calc(var(--logo)*0.010)] -mb-[calc(var(--logo)*0.015)] -ml-[calc(var(--logo)*0.042)] [--logo:min(54.5vw,30rem)] lg:-mt-[calc(var(--logo)*0.060)] lg:mb-[calc(var(--logo)*0.055)] lg:ml-[calc(var(--logo)*0.208)] lg:[--logo:28.5rem]"
           >
             <Image
-              src="/imagens/equipa/logoefavicon.jpg.png"
+              src="/imagens/marca/ondelle-wordmark.png"
               alt={contactos.title}
-              width={1536}
-              height={1024}
+              width={1330}
+              height={356}
               sizes="(min-width: 1024px) 28.5rem, 54.5vw"
               className="h-auto w-[var(--logo)]"
             />
@@ -84,18 +84,13 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
           </div>
 
           <div>
-            <p className="label mb-5 text-texto-fraca">Contacto</p>
-            <a href={`tel:+351${brand.phone.replace(/\s/g, "")}`} className="block text-texto hover:text-ouro">
+            <p className="label mb-5 text-texto-fraca">Contact</p>
+            <a href={brand.booking} className="block text-texto hover:text-ouro">
               {brand.phone}
             </a>
             <p className="label mt-2 mb-4 text-texto-fraca">{brand.phoneNote}</p>
-            <a
-              href={brand.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-texto hover:text-ouro"
-            >
-              Falar por WhatsApp
+            <a href={brand.booking} className="block text-texto hover:text-ouro">
+              Call the clinic
             </a>
             {/* O email fica DEPOIS do WhatsApp de propósito: é o canal mais
                 lento dos dois e neste negócio quem escreve quer marcação. */}
@@ -120,7 +115,7 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
           </div>
 
           <div>
-            <p className="label mb-5 text-texto-fraca">Horário</p>
+            <p className="label mb-5 text-texto-fraca">Hours</p>
             <dl className="space-y-3">
               {brand.hours.map((h) => (
                 <div key={h.dias}>
@@ -179,17 +174,6 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
               Computador e tablet ficam nos -10% de sempre — o valor é o
               mesmo, mas por caminhos diferentes: as duas media queries não se
               cruzam. */}
-          <div className="pointer-events-none absolute top-[24%] right-[calc(var(--spacing-gutter)*-1)] h-[30%] w-[42vw] max-md:-translate-x-[10%] md:inset-y-0 md:top-0 md:h-auto md:w-[41.4%] md:-translate-x-[10%]">
-            <Image
-              src="/imagens/destaque/rostoouro.jpg.png"
-              alt=""
-              aria-hidden
-              fill
-              sizes="(min-width: 768px) 46vw, 62vw"
-              className="object-contain [object-position:100%_100%] md:[object-position:100%_50%]"
-            />
-          </div>
-
           <RevealText
             as="h2"
             id="fecho-titulo"
@@ -207,9 +191,7 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
               {fecho.body}
             </p>
             <a
-              href={brand.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={brand.booking}
               className="label ouro-vivo inline-block rounded-full px-10 py-5 transition-shadow duration-500 hover:shadow-[0_0_40px_-12px_var(--color-ouro)]"
             >
               {fecho.cta}
@@ -223,10 +205,10 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
                 logótipo são pequenas (1,5% / 2,3% / 4,2%), o que a 180px de
                 largura dá 2px em cima, 3px em baixo e 8px à esquerda. */}
             <Image
-              src="/imagens/equipa/logoefavicon.jpg.png"
+              src="/imagens/marca/ondelle-wordmark.png"
               alt={brand.name}
-              width={1536}
-              height={1024}
+              width={1330}
+              height={356}
               sizes="180px"
               className="-mt-[2px] -mb-[3px] -ml-[8px] h-auto w-[180px]"
             />
@@ -248,9 +230,15 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
             </nav>
           </div>
           {/* Registo na ERS e licença de funcionamento. Numa clínica isto
-              não é rodapé decorativo: é o que distingue uma unidade de saúde
-              registada de uma página bonita. */}
-          <p className="label mt-10 text-fundo/35 md:pl-32">{footer.registos}</p>
+              não é rodapé decorativo. Aqui deixou de ser um número de registo
+              e passou a ser a declaração de que a marca é fictícia — por isso
+              saiu da classe `label`: 11px em maiúsculas a 35% de opacidade dava
+              1,1:1 de contraste, ou seja, invisível. Uma declaração que ninguém
+              consegue ler não declara nada. Caixa normal, 12px e opacidade a
+              75% põem-na acima de 4,5:1 sem gritar. */}
+          <p className="mt-10 max-w-[62ch] text-[12px] leading-[1.6] text-fundo/75 md:pl-32">
+            {footer.registos}
+          </p>
           <p className="label mt-2 text-fundo/35 md:pl-32">
             © {new Date().getFullYear()} {brand.full} · {brand.city}
           </p>

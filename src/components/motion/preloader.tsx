@@ -278,7 +278,7 @@ export function Preloader() {
           // (H - vao)/2 + vao/2 = H/2.
           const topoFinal = (H - alturaVao) / 2;
           const larguraLogo = largura(W) * logoDoVao(W);
-          const alturaLogo = larguraLogo * (1024 / 1536);
+          const alturaLogo = larguraLogo * (356 / 1330);
 
           // A subida extra entra a par de `subida.v`: a 1 (marca no centro)
           // vale zero, a 0 (portal aberto) vale tudo. Assim o deslocamento
@@ -429,7 +429,7 @@ export function Preloader() {
         // 510x647 de antes — 2,2x a resolução. Identificada por comparação
         // de pixels e não pelo nome. Vai por `next/image`, por isso os 2MB
         // ficam no servidor: o browser recebe a versão redimensionada.
-        src="/imagens/destaque/capa.jpg.png"
+        src="/imagens/placeholder/retrato-4x5.jpg"
         alt=""
         aria-hidden
         fill
@@ -516,8 +516,8 @@ export function Preloader() {
         <img
           src={abertura.logo}
           alt=""
-          width={512}
-          height={512}
+          width={1330}
+          height={356}
           fetchPriority="high"
           decoding="sync"
           className="block h-auto w-full select-none"

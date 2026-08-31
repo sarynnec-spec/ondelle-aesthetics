@@ -1,50 +1,62 @@
 /**
- * Todo o texto do site num só ficheiro, para ser reescrito sem tocar em
- * componentes.
+ * Every string on the site lives in this one file, so the whole brand can be
+ * rewritten without opening a component.
  *
- * Copy base, herdada do projeto da Sofia Sales. Trocar os nomes da clinica ao longo do ficheiro antes de mostrar. Direção clínica e contactos são
- * reais — confirmar antes de publicar.
+ * ONDELLE AESTHETICS IS A FICTIONAL BRAND. It was created as a portfolio
+ * demonstration of a premium med spa website. The clinic, the medical
+ * director, the address and the phone number do not exist. The phone number
+ * uses the 555-01xx range reserved for fiction in North America, so it can
+ * never reach a real person, and the address is a neighbourhood rather than
+ * a building, so no real business or resident sits at it.
+ *
+ * Nothing here is inherited from a real client. Every name, credential and
+ * contact detail from the original build was removed.
  */
 
 /**
- * Fotografia e vídeo: `null` é um estado legítimo, não um esquecimento.
+ * Photography and video: `null` is a legitimate state, not an oversight.
  *
- * Enquanto for `null`, a moldura desenha um gradiente com o enquadramento e a
- * proporção certos. Para colocar o ficheiro real, ponha aqui o caminho a
- * partir de `public/` — ver `public/imagens/README.md`.
+ * While it is `null`, the frame draws a gradient with the correct crop and
+ * aspect ratio. To drop in a real file, put the path from `public/` here —
+ * see `IMAGENS-A-GERAR.md` at the root for the shot list and the exact
+ * dimensions each slot needs.
  */
 type Media = string | null;
 
 const semMedia: Media = null;
 
 export const brand = {
-  name: "SOFIA SALES",
-  full: "Sofia Sales Clinic",
-  tagline: "Beleza avançada. Resultados naturais.",
-  city: "Rio Tinto",
-  // Sem domínio próprio: o site vive no endereço da Vercel. O email é o
-  // Gmail real da clínica — quando houver domínio, passa a geral@dominio e
-  // este fica a reencaminhar.
-  url: "https://sofia-sales-clinic.vercel.app",
-  email: "sofiasalesclinic@gmail.com",
-  phone: "935 751 928",
-  phoneNote: "Telefone · WhatsApp",
-  whatsapp: "https://wa.me/351935751928",
-  instagram: { handle: "@sofiasales_clinic", url: "https://instagram.com/sofiasales_clinic" },
+  name: "ONDELLE",
+  full: "Ondelle Aesthetics",
+  tagline: "Advanced aesthetics. Naturally you.",
+  city: "Miami",
+  url: "https://ondelle-aesthetics.vercel.app",
+  email: "hello@ondelleaesthetics.com",
+  // The 555-0100..0199 block is reserved for fictional use, so this can never
+  // ring a real person. Do not swap in a working number unless somebody is
+  // actually there to answer it.
+  phone: "(305) 555-0142",
+  phoneNote: "Call · Text",
+  // No WhatsApp: US med spas book by phone or web form, not WhatsApp. That
+  // was a Portuguese market convention from the original build.
+  booking: "tel:+13055550142",
+  instagram: { handle: "@ondelleaesthetics", url: "#" },
   address: {
-    street: "Rua Dr. José Luís de Araújo, 69",
-    postal: "4435-154",
-    city: "Rio Tinto",
-    country: "PT",
+    // Neighbourhood, deliberately without a street number. A fictional
+    // business sitting on a real address becomes somebody else's problem.
+    street: "Miami Design District",
+    postal: "FL 33137",
+    city: "Miami",
+    country: "US",
   },
   hours: [
-    { dias: "Terça a sexta", horas: "09:30 — 19:30" },
-    { dias: "Sábado", horas: "09:30 — 14:30" },
-    { dias: "Domingo e segunda", horas: "Encerrado" },
+    { dias: "Monday to Friday", horas: "9:00 AM — 7:00 PM" },
+    { dias: "Saturday", horas: "10:00 AM — 4:00 PM" },
+    { dias: "Sunday", horas: "Closed" },
   ],
 } as const;
 
-/** Numeração das secções — alimenta o contador fixo. */
+/** Section numbering — feeds the fixed counter. */
 export const sectionIds = [
   "inicio",
   "introducao",
@@ -66,484 +78,426 @@ export const sectionIds = [
 export type SectionId = (typeof sectionIds)[number];
 
 export const counterLabels = [
-  "Início",
-  "Introdução",
-  "Filosofia",
-  "Direção clínica",
-  "Medicina estética",
-  "Tecnologia",
-  "Rosto",
-  "Corpo",
-  "Pele",
-  "Rituais",
-  "Experiência",
-  "Protocolos",
-  "Resultados",
-  "Marcar",
-  "Contactos",
+  "Start",
+  "Introduction",
+  "Philosophy",
+  "Medical Direction",
+  "Injectables",
+  "Technology",
+  "Face",
+  "Body",
+  "Skin",
+  "Rituals",
+  "Experience",
+  "Treatment Plans",
+  "Results",
+  "Book",
+  "Contact",
 ];
 
 export const nav = [
-  { label: "Início", href: "#inicio" },
-  { label: "A Sofia Sales", href: "#filosofia" },
-  { label: "Tratamentos", href: "#medicina-estetica" },
-  { label: "Tecnologia", href: "#tecnologia" },
-  { label: "Experiência", href: "#experiencia" },
-  { label: "Contactos", href: "#contactos" },
+  { label: "Home", href: "#inicio" },
+  { label: "About", href: "#filosofia" },
+  { label: "Treatments", href: "#medicina-estetica" },
+  { label: "Technology", href: "#tecnologia" },
+  { label: "Experience", href: "#experiencia" },
+  { label: "Contact", href: "#contactos" },
 ] as const;
 
-export const ctaLabel = "Marcar consulta";
+export const ctaLabel = "Book a Consultation";
 
-// ── 00 · Abertura ────────────────────────────────────────────────────────
+// ── 00 · Opening ─────────────────────────────────────────────────────────
 /**
- * O logótipo do portal — **imagem, já não vídeo**.
+ * The wordmark that rises inside the portal during the intro.
  *
- * O `videoinicio.mp4` saiu da abertura. Trazia um foco de luz no fundo
- * (canal verde de 26 nos cantos a 67 no topo-centro, contra 50 do site) que
- * se lia como uma mancha sobre o bordo, e nenhuma das cinco tentativas de o
- * domar resultou: cor chapada no portal, remoção do fundo por `lighten`,
- * cópia desfocada a cobrir, faixas com a linha de bordo, e um véu em
- * degradê. A última ainda deixava a mancha à vista.
- *
- * O PNG não tem fundo — logo não há mancha possível. É o mesmo logótipo,
- * reduzido a 512×512 e convertido: 59 KB. À largura a que é desenhado
- * (~77% da largura do vão) sobra resolução mesmo em ecrã de dupla
- * densidade.
- *
- * O ficheiro de vídeo fica em `public` caso um dia volte a ser preciso.
+ * `null` until an ONDELLE wordmark exists. The original file was the real
+ * clinic's logo and could not travel into a demonstration brand.
  */
 export const abertura = {
-  logo: "/imagens/equipa/logoefavicon.jpg.png",
+  logo: "/imagens/marca/ondelle-wordmark.png",
 } as const;
 
 // ── 01 · Hero ────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: "Rio Tinto · Estética Avançada",
-  title: "Beleza avançada.\nResultados que continuam a ser seus.",
-  lead: "Na Sofia Sales, a estética começa antes do tratamento. Começa na avaliação, na escuta e na compreensão de cada rosto, cada corpo e cada objetivo.",
-  note: "Protocolos personalizados. Tecnologia avançada. Acompanhamento clínico.",
-  cta: "Marcar consulta",
-  // Trocado por ela: o `videosite.mp4` era o da clínica de origem (hélice de
-  // ADN e malha sobre um rosto). Este é o dela. 1280×720, 6 s.
-  video: "/imagens/video/videocapa.mp4.mp4",
-  /**
-   * Versão vertical (720×1280), só para telemóvel. Recortada do `videocapa`
-   * pelo centro — o rosto está centrado no plano, por isso o corte não perde
-   * nada. O `videocelular.mp4` que aqui estava era da clínica de origem e
-   * ficava a aparecer a quem abrisse no telemóvel.
-   */
-  videoMobile: "/imagens/video/videocapa-vertical.mp4",
+  eyebrow: "Miami · Advanced Aesthetics",
+  title: "Advanced aesthetics.\nResults that still look like you.",
+  lead: "At Ondelle, treatment begins long before the first appointment. It begins with assessment, with listening, and with understanding your face, your body and what you actually want.",
+  note: "Personalized treatment plans. Advanced technology. Physician-led care.",
+  cta: "Book a Consultation",
+  // Generated ambient gradient, not footage. It is a stand-in that reads as
+  // a deliberate dark opening rather than a missing file, and it carries no
+  // people, no premises and no claim.
+  video: "/imagens/video/ambient-hero.mp4",
+  videoMobile: "/imagens/video/ambient-hero-vertical.mp4",
 } as const;
 
-// ── 02 · Introdução ──────────────────────────────────────────────────────
+// ── 02 · Introduction ────────────────────────────────────────────────────
 export const intro = {
-  label: "A Sofia Sales",
-  title: "A sua beleza não precisa de ser transformada.\nPrecisa de ser compreendida.",
+  label: "About Ondelle",
+  title: "Your face does not need to be transformed.\nIt needs to be understood.",
   body: [
-    // O segundo parágrafo saiu: aquele espaço é agora da fotografia da
-    // modelo, que ocupa dali até ao fim do painel branco (ver `page.tsx`).
-    "Na Sofia Sales, acreditamos numa estética que respeita a identidade de cada pessoa.",
+    "At Ondelle, we believe in aesthetics that respect who you already are.",
   ],
-  close: "Porque o verdadeiro luxo não está em parecer diferente. Está em sentir-se ainda mais você.",
+  close: "Because real luxury is not looking like someone else. It is feeling more like yourself.",
   imagem: semMedia,
   alt: "",
 } as const;
 
-// ── 03 · Filosofia ───────────────────────────────────────────────────────
+// ── 03 · Philosophy ──────────────────────────────────────────────────────
 export const filosofia = {
-  label: "Filosofia",
-  title: "Menos excesso.\nMais precisão.",
+  label: "Philosophy",
+  title: "Less excess.\nMore precision.",
   items: [
-    { n: "01", title: "A avaliação" },
-    { n: "02", title: "A técnica" },
-    { n: "03", title: "A tecnologia" },
-    { n: "04", title: "A escolha do protocolo" },
-    { n: "05", title: "O acompanhamento" },
+    { n: "01", title: "The assessment" },
+    { n: "02", title: "The technique" },
+    { n: "03", title: "The technology" },
+    { n: "04", title: "The treatment plan" },
+    { n: "05", title: "The follow-up" },
   ],
-  body: "Na Sofia Sales, cada tratamento é pensado de forma individualizada, tendo em conta as características, necessidades e objetivos de cada paciente.",
-  close: "O nosso compromisso é simples: elevar, sem descaracterizar.",
+  body: "Every treatment at Ondelle is planned individually, around your anatomy, your concerns and the outcome you are looking for.",
+  close: "Our commitment is simple: enhance, without erasing.",
 } as const;
 
-// ── 04 · Direção clínica ─────────────────────────────────────────────────
+// ── 04 · Medical direction ───────────────────────────────────────────────
 export const direcaoClinica = {
-  label: "Direção clínica",
-  title: "Experiência clínica.\nOlhar individual.",
-  body: "Sob a direção da Dra. Sofia Sales, farmacêutica e mesoterapeuta, a Sofia Sales Clinic desenvolve protocolos personalizados de medicina estética, executados por profissionais qualificados em cada área, com precisão técnica e uma abordagem centrada no paciente.",
-  purpose: "Cada decisão é tomada com um propósito:",
-  close: "respeitar a sua fisionomia, valorizar a sua individualidade e procurar resultados naturais.",
-  // O cargo diz a formação real dela. A distinção importa: ela dirige a
-  // clínica; os atos médicos são executados por quem tem competência para
-  // os praticar. Não é preciosismo — é o que a lei separa.
-  person: { name: "Dra. Sofia Sales", role: "Farmacêutica e mesoterapeuta · Direção da clínica" },
+  label: "Medical Direction",
+  title: "Clinical experience.\nAn individual eye.",
+  body: "Ondelle is a physician-led practice. Every treatment plan is designed under medical direction and performed by licensed providers, with technical precision and a patient-centered approach.",
+  purpose: "Every decision is made with one purpose:",
+  close: "to respect your anatomy, to honor what makes you distinctive, and to pursue results that read as natural.",
+  // Fictional, like the clinic. See the notice at the top of this file and
+  // the one rendered in the footer.
+  person: { name: "Dr. Camille Roux, MD", role: "Medical Director" },
   /**
-   * A moldura roda entre estes retratos, e a legenda acompanha o que está à
-   * vista. A da equipa não leva segunda linha: "Equipa Sofia Sales" já se
-   * explica, e um cargo por baixo de um grupo não quer dizer nada.
-   *
-   * Os nomes dos ficheiros têm espaço e extensão dupla porque foi assim que
-   * vieram; o espaço vai codificado no caminho.
+   * The frame rotates between these portraits and the caption follows what
+   * is on screen. All three are `null`: the original build used photographs
+   * of a real clinician and a real team, and none of that could travel into
+   * a demonstration brand. Until generated portraits exist, the frame draws
+   * a gradient in the brand tone.
    */
   retratos: [
     {
-      // Ficheiro grande (1122x1402). Ver nota no preloader.
-      src: "/imagens/destaque/capa.jpg.png",
-      alt: "Dra. Sofia Sales",
-      nome: "Dra. Sofia Sales",
-      papel: "Farmacêutica e mesoterapeuta · Direção da clínica",
-      // Apresentação tirada da página oficial dela. CONFIRMAR o fecho da
-      // segunda frase: no original está uma palavra que não se lê na captura.
-      bio: "Farmacêutica e mesoterapeuta, com uma paixão de longa data pelo universo da estética. Desde jovem que se encanta pela capacidade que os tratamentos estéticos têm de realçar a beleza natural e a autoestima.",
+      src: semMedia,
+      alt: "Medical Director, Ondelle Aesthetics",
+      nome: "Dr. Camille Roux, MD",
+      papel: "Medical Director",
+      bio: "Board-certified in aesthetic medicine, with a practice built around restraint. The work she is known for is the work you cannot point to — the result that reads as rest rather than as treatment.",
     },
     {
-      // Ficheiro grande (1085x1450 contra 477x632). Identificado por
-      // comparação de pixels: o nome em `destaque/` está desencontrado
-      // do de `equipa/` — este `drasofia` é o retrato que aqui era
-      // `drasofia1`.
-      src: "/imagens/destaque/drasofia.jpg.png",
-      alt: "Dra. Sofia Sales",
-      nome: "Dra. Sofia Sales",
-      papel: "Farmacêutica e mesoterapeuta · Direção da clínica",
+      src: semMedia,
+      alt: "Medical Director, Ondelle Aesthetics",
+      nome: "Dr. Camille Roux, MD",
+      papel: "Medical Director",
     },
     {
-      // Terceiro retrato dela, confirmado por ela. Não tem correspondente em
-      // baixa resolução no site — é fotografia nova, não uma substituição.
-      src: "/imagens/destaque/drasofia1.jpg.png",
-      alt: "Dra. Sofia Sales",
-      nome: "Dra. Sofia Sales",
-      papel: "Farmacêutica e mesoterapeuta · Direção da clínica",
-    },
-    {
-      // Ficheiro grande (1141x1379 contra 528x640).
-      src: "/imagens/destaque/equipaclinic.jpg.png",
-      alt: "Equipa da Sofia Sales Clinic",
-      nome: "Equipa Sofia Sales",
+      src: semMedia,
+      alt: "The Ondelle team",
+      nome: "The Ondelle Team",
     },
   ],
-  imagem: semMedia, // public/imagens/equipa/ — 1:1
-  alt: "",
-} as const;
-
-/**
- * Texto do espaço, adaptado do anúncio de abertura da página oficial.
- *
- * Duas coisas mudaram de propósito: a redação passou a português europeu
- * ("num ambiente", "os seus objetivos"), e saiu o "abre brevemente" — a
- * clínica já abriu, e um anúncio de abertura num site em funcionamento
- * envelhece mal.
- */
-export const espaco = {
-  label: "O espaço",
-  intro: "Clínica de medicina estética e cirurgia plástica.",
-  // Sem quebra escrita à mão: em computador esta frase é UMA linha, e em
-  // telemóvel/tablet o `max-w-[14ch]` parte-a exatamente onde o \n a partia
-  // (medido: "Um espaço pensado" dá 187px contra 196px de caixa a 390px de
-  // ecrã; a palavra seguinte já não cabe). Uma quebra fixa impedia a linha
-  // única em computador.
-  title: "Um espaço pensado para si.",
-  body: [
-    "Um espaço pensado especialmente para quem procura realçar a sua beleza de maneira natural e saudável.",
-    "Aqui encontra os tratamentos mais inovadores e personalizados, realizados por profissionais altamente qualificados, num ambiente acolhedor e moderno.",
-    "A nossa missão é ajudar cada pessoa a atingir os seus objetivos estéticos com segurança, carinho e competência.",
-  ],
-  close: "Cada detalhe foi pensado para proporcionar uma experiência única, onde o bem-estar está em primeiro lugar.",
-} as const;
-
-// ── 05 · Medicina estética ───────────────────────────────────────────────
-export const medicinaEstetica = {
-  id: "medicina-estetica",
-  label: "Medicina estética",
-  title: "A arte da precisão",
-  intro: [
-    "A medicina estética exige mais do que técnica.",
-    "Exige conhecimento, proporção e sensibilidade.",
-  ],
-  cta: "Conhecer medicina estética",
-  items: [
-    {
-      n: "01",
-      title: "Toxina Botulínica",
-      body: "Protocolos personalizados para suavizar linhas de expressão e preservar a naturalidade dos movimentos e da expressão facial.",
-      imagem: "/imagens/protocolos/protocolos-toxina-botulinica.jpg.jpg",
-      alt: "Aplicação de toxina botulínica",
-    },
-    {
-      n: "02",
-      title: "Preenchimentos",
-      body: "Harmonização e reposição de volume através de uma abordagem individualizada, respeitando a anatomia e as características de cada rosto.",
-      imagem: "/imagens/protocolos/protocolos-preenchimentos.jpg.jpg",
-      alt: "Preenchimento facial com ácido hialurónico",
-    },
-    {
-      n: "03",
-      title: "Hiperidrose Axilar",
-      body: "Aplicação de toxina botulínica na região axilar para reduzir a transpiração excessiva, mediante avaliação prévia.",
-      imagem: "/imagens/destaque/hiperidrose.jpg.png",
-      alt: "Tratamento de hiperidrose axilar",
-    },
-  ],
-} as const;
-
-// ── 06 · Tecnologia ──────────────────────────────────────────────────────
-export const tecnologia = {
-  id: "tecnologia",
-  label: "Tecnologia",
-  title: "Tecnologia que trabalha a favor da sua pele.",
-  intro: [
-    "A inovação só faz sentido quando é aplicada com propósito.",
-    "Na Sofia Sales, tecnologia e conhecimento clínico encontram-se para criar protocolos adaptados às necessidades de cada paciente.",
-  ],
-  kinetic: "Tecnologia. Precisão. Personalização.",
-  items: [
-    {
-      n: "01",
-      title: "Morpheus8",
-      body: "Tecnologia avançada utilizada em protocolos personalizados de tratamento da pele, incluindo abordagens para a zona do contorno dos olhos.",
-      imagem: "/imagens/protocolos/protocolos-morpheus8.jpg.jpg",
-      alt: "Sessão de Morpheus8",
-    },
-    {
-      n: "02",
-      title: "HIFU",
-      body: "Ultrassom microfocado de alta intensidade utilizado em protocolos destinados à firmeza e definição.",
-      imagem: "/imagens/protocolos/protocolos-hifu.jpg.jpg",
-      alt: "Sessão de HIFU",
-    },
-    {
-      n: "03",
-      title: "IPL",
-      body: "Luz pulsada intensa integrada em protocolos estéticos faciais e corporais personalizados.",
-      imagem: "/imagens/protocolos/protocolos-ipl-pele.jpg.png",
-      alt: "Sessão de luz intensa pulsada",
-    },
-    {
-      n: "04",
-      title: "Laser",
-      body: "Tecnologia aplicada em protocolos de depilação, adaptados às diferentes zonas e características de cada pessoa.",
-      imagem: "/imagens/protocolos/protocolos-laser.jpg.png",
-      alt: "Sessão de laser",
-    },
-  ],
-} as const;
-
-// ── 07 · Rosto ───────────────────────────────────────────────────────────
-export const rosto = {
-  label: "Rosto",
-  title: "O seu rosto.\nA sua identidade.",
-  kicker: "A beleza está no equilíbrio.",
-  body: [
-    "Os nossos protocolos faciais são desenvolvidos para cuidar, melhorar e valorizar — sem apagar aquilo que torna cada rosto único.",
-    "Desde procedimentos injetáveis a tecnologias avançadas, cada tratamento é pensado individualmente.",
-  ],
-  close: "Resultados naturais começam com decisões personalizadas.",
-  imagem: "/imagens/destaque/rostorosto-principal.jpg.png",
-  alt: "Rosto em repouso, luz natural",
-} as const;
-
-// ── 08 · Corpo ───────────────────────────────────────────────────────────
-export const corpo = {
-  id: "corpo",
-  label: "Corpo",
-  title: "Cuidar do corpo é também cuidar de si.",
-  intro: ["Protocolos corporais desenhados para diferentes necessidades, objetivos e momentos."],
-  cta: "Explorar tratamentos",
-  items: [
-    {
-      n: "01",
-      title: "Drenagem Linfática",
-      body: "Uma abordagem orientada para o bem-estar corporal e a sensação de leveza.",
-      imagem: "/imagens/protocolos/protocolos-drenagem-linfatica.jpg.jpg",
-      alt: "Drenagem linfática manual",
-    },
-    {
-      n: "02",
-      title: "Drenomodeladora",
-      body: "Protocolos personalizados com foco no cuidado e modelação corporal.",
-      imagem: "/imagens/protocolos/protocolosdrenomodeladora.jpg.png",
-      alt: "Massagem drenomodeladora",
-    },
-    {
-      n: "03",
-      title: "Depilação a Laser",
-      body: "Tecnologia avançada para protocolos personalizados de redução de pelo em diferentes zonas do corpo.",
-      imagem: "/imagens/protocolos/protocolos-depilacao-laser.jpg.jpg",
-      alt: "Sessão de depilação a laser",
-    },
-    {
-      n: "04",
-      title: "Harmonização Glútea",
-      body: "Conjunto de procedimentos estéticos minimamente invasivos na região dos glúteos, para melhorar o contorno, o volume, a firmeza e a simetria — sem necessidade de cirurgia plástica.",
-      imagem: "/imagens/destaque/harmonizacaogluteo.jpg.jpg",
-      alt: "Harmonização glútea",
-    },
-    {
-      n: "05",
-      title: "Lipo Química Definitiva",
-      body: "Protocolo injetável para redução de gordura localizada, aplicado por sessões e sempre mediante avaliação prévia.",
-      // O único dos cinco que é QUADRADO (400x400) e pequeno. A moldura é 4:5,
-      // por isso esta sobe para 523px de altura num cartão de computador —
-      // 1,3x acima do tamanho real, e mais em ecrã retina. Fica porque é a
-      // fotografia dela; se um dia parecer desfocada, é isto e a solução é um
-      // ficheiro maior, não código.
-      imagem: "/imagens/destaque/lipoquimica.jpg.jpg",
-      alt: "Lipo química definitiva",
-    },
-  ],
-} as const;
-
-// ── 09 · Pele ────────────────────────────────────────────────────────────
-export const pele = {
-  id: "pele",
-  label: "Pele",
-  title: "Uma pele bem cuidada não precisa de filtros.",
-  intro: [
-    "A pele muda. As necessidades mudam. O protocolo também deve mudar.",
-    "Na Sofia Sales, avaliamos as necessidades da sua pele para criar uma abordagem personalizada.",
-  ],
-  items: [
-    {
-      n: "01",
-      title: "Limpeza de Pele Profunda",
-      body: "Cuidado intensivo para higienizar, renovar e revitalizar a pele.",
-      imagem: "/imagens/protocolos/protocolos-limpeza-pele-profunda.jpg.jpg",
-      alt: "Limpeza de pele profunda",
-    },
-    {
-      n: "02",
-      title: "IPL",
-      body: "Protocolos personalizados com luz pulsada intensa para diferentes necessidades estéticas.",
-      imagem: "/imagens/protocolos/protocolos-ipl-pele.jpg.png",
-      alt: "Luz intensa pulsada aplicada à pele",
-    },
-    {
-      n: "03",
-      title: "Hidratação",
-      body: "Cuidados direcionados para devolver conforto, luminosidade e aparência saudável à pele.",
-      imagem: "/imagens/protocolos/protocolos-hidratacao.jpg.jpg",
-      alt: "Protocolo de hidratação facial",
-    },
-  ],
-} as const;
-
-// ── 10 · Rituais de beleza ───────────────────────────────────────────────
-export const rituais = {
-  id: "rituais",
-  label: "Rituais de beleza",
-  title: "Os pequenos detalhes também fazem parte da experiência.",
-  intro: ["A experiência Sofia Sales estende-se para além da medicina estética."],
-  kinetic: "Beleza, dos grandes resultados aos pequenos detalhes.",
-  items: [
-    {
-      n: "01",
-      title: "Hidra Gloss",
-      body: "Hidratação e cuidado para os lábios.",
-      imagem: "/imagens/espaco/espaco-hidra-gloss.jpg.jpg",
-      alt: "Ritual Hidra Gloss",
-    },
-    {
-      n: "02",
-      title: "Tratamento capilar",
-      body: "Cuidado do couro cabeludo e do cabelo, com protocolos ajustados a cada caso.",
-      // A clínica não faz unhas — fazia parte da copy herdada, e a fotografia
-      // que aqui estava era de outra clínica. Esta é dela.
-      imagem: "/imagens/destaque/tratamentocapilar.jpg.jpg",
-      alt: "Tratamento capilar",
-    },
-    {
-      n: "03",
-      title: "Massagem",
-      body: "Momentos de relaxamento e bem-estar, com técnicas adaptadas ao que o corpo pede.",
-      // Substituiu "Pestanas & Sobrancelhas", que vinha da copy herdada e não
-      // é serviço desta clínica.
-      imagem: "/imagens/destaque/massagem.jpg.png",
-      alt: "Massagem",
-    },
-  ],
-} as const;
-
-// ── 11 · Experiência ─────────────────────────────────────────────────────
-export const experiencia = {
-  label: "Experiência",
-  title: "Entre. Desacelere.\nCuide de si.",
-  body: ["A Sofia Sales foi pensada para que cada visita seja mais do que um tratamento."],
-  beats: ["É um momento para parar.", "Para ser cuidada.", "Para confiar.", "Para sair sentindo-se melhor consigo mesma."],
-  close: "Um espaço onde tecnologia e cuidado encontram uma experiência verdadeiramente personalizada.",
   imagem: semMedia,
   alt: "",
 } as const;
 
-// ── 12 · Protocolos personalizados ───────────────────────────────────────
-export const protocolos = {
-  label: "Protocolos personalizados",
-  title: "Não existe um protocolo igual para todas.",
-  beats: ["Por isso, começamos por ouvir.", "Depois avaliamos.", "Só então definimos."],
-  body: "Cada protocolo Sofia Sales é construído de acordo com as características individuais, necessidades e objetivos de cada paciente.",
-  close: "A personalização não é um detalhe. É o princípio.",
-  /** Descobrir → Avaliar → Personalizar → Tratar → Acompanhar */
-  jornada: ["Descobrir", "Avaliar", "Personalizar", "Tratar", "Acompanhar"],
-} as const;
-
-// ── 13 · Resultados naturais ─────────────────────────────────────────────
-export const resultados = {
-  label: "Resultados naturais",
-  title: "A melhor versão de si.\nSem deixar de ser você.",
-  pares: [
-    { nao: "Não procuramos padrões.", sim: "Procuramos equilíbrio." },
-    { nao: "Não procuramos transformar.", sim: "Procuramos valorizar." },
-    { nao: "Não procuramos excessos.", sim: "Procuramos precisão." },
+export const espaco = {
+  label: "The Space",
+  intro: "A medical aesthetics practice in the Miami Design District.",
+  title: "A space built around you.",
+  body: [
+    "A space designed for people who want to look like a rested version of themselves, not a different person.",
+    "You will find advanced, individually planned treatments here, delivered by licensed providers in a calm and modern setting.",
+    "Our work is to help you reach your aesthetic goals safely, attentively and competently.",
   ],
-  close: "Sofia Sales é estética avançada com uma visão natural da beleza.",
+  close: "Every detail was considered to make the visit itself worth having, with your comfort first.",
 } as const;
 
-// ── 14 · CTA principal ───────────────────────────────────────────────────
+// ── 05 · Injectables ─────────────────────────────────────────────────────
+export const medicinaEstetica = {
+  id: "medicina-estetica",
+  label: "Injectables",
+  title: "The art of precision",
+  intro: [
+    "Injectable treatment takes more than technique.",
+    "It takes anatomy, proportion and judgment.",
+  ],
+  cta: "Explore injectables",
+  items: [
+    {
+      n: "01",
+      title: "Neuromodulators",
+      body: "Personalized plans to soften expression lines while keeping facial movement and expression intact.",
+      imagem: "/imagens/protocolos/protocolos-toxina-botulinica.jpg.jpg",
+      alt: "Neuromodulator treatment",
+    },
+    {
+      n: "02",
+      title: "Dermal Fillers",
+      body: "Volume restoration and facial balancing through an individualized approach that respects your anatomy.",
+      imagem: "/imagens/protocolos/protocolos-preenchimentos.jpg.jpg",
+      alt: "Dermal filler treatment",
+    },
+    {
+      n: "03",
+      title: "Hyperhidrosis Treatment",
+      body: "Neuromodulator treatment of the underarm area to reduce excessive sweating, following consultation.",
+      imagem: semMedia,
+      alt: "Hyperhidrosis treatment",
+    },
+  ],
+} as const;
+
+// ── 06 · Technology ──────────────────────────────────────────────────────
+export const tecnologia = {
+  id: "tecnologia",
+  label: "Technology",
+  title: "Technology that works for your skin.",
+  intro: [
+    "Innovation only matters when it is applied with intent.",
+    "At Ondelle, technology and clinical judgment meet to build plans around what your skin actually needs.",
+  ],
+  kinetic: "Technology. Precision. Personalization.",
+  items: [
+    {
+      n: "01",
+      title: "RF Microneedling",
+      body: "Radiofrequency microneedling used in personalized skin treatment plans, including approaches for the delicate eye area.",
+      imagem: "/imagens/protocolos/protocolos-morpheus8.jpg.jpg",
+      alt: "Radiofrequency microneedling session",
+    },
+    {
+      n: "02",
+      title: "Ultrasound Lifting",
+      body: "High-intensity focused ultrasound used in plans aimed at firmness and definition.",
+      imagem: "/imagens/protocolos/protocolos-hifu.jpg.jpg",
+      alt: "Focused ultrasound session",
+    },
+    {
+      n: "03",
+      title: "IPL Photofacial",
+      body: "Intense pulsed light integrated into personalized facial and body treatment plans.",
+      imagem: "/imagens/protocolos/protocolos-ipl-pele.jpg.png",
+      alt: "Intense pulsed light session",
+    },
+    {
+      n: "04",
+      title: "Laser Treatments",
+      body: "Laser technology applied across hair reduction and resurfacing plans, adapted to each area and skin type.",
+      imagem: "/imagens/protocolos/protocolos-laser.jpg.png",
+      alt: "Laser treatment session",
+    },
+  ],
+} as const;
+
+// ── 07 · Face ────────────────────────────────────────────────────────────
+export const rosto = {
+  label: "Face",
+  title: "Your face.\nYour identity.",
+  kicker: "Beauty lives in balance.",
+  body: [
+    "Our facial plans are built to care for, improve and honor — without erasing what makes a face recognizable as yours.",
+    "From injectables to advanced devices, every treatment is decided one patient at a time.",
+  ],
+  close: "Natural results start with personalized decisions.",
+  imagem: semMedia,
+  alt: "",
+} as const;
+
+// ── 08 · Body ────────────────────────────────────────────────────────────
+export const corpo = {
+  id: "corpo",
+  label: "Body",
+  title: "Caring for your body is caring for yourself.",
+  intro: ["Body treatment plans designed around different needs, goals and stages."],
+  cta: "Explore body treatments",
+  items: [
+    {
+      n: "01",
+      title: "Lymphatic Drainage",
+      body: "A wellness-led approach to circulation, recovery and a feeling of lightness.",
+      imagem: "/imagens/protocolos/protocolos-drenagem-linfatica.jpg.jpg",
+      alt: "Manual lymphatic drainage",
+    },
+    {
+      n: "02",
+      title: "Body Contouring",
+      body: "Non-surgical contouring plans focused on shape, firmness and definition.",
+      imagem: "/imagens/protocolos/protocolosdrenomodeladora.jpg.png",
+      alt: "Body contouring treatment",
+    },
+    {
+      n: "03",
+      title: "Laser Hair Removal",
+      body: "Advanced laser technology for personalized hair reduction plans across different areas of the body.",
+      imagem: "/imagens/protocolos/protocolos-depilacao-laser.jpg.jpg",
+      alt: "Laser hair removal session",
+    },
+    {
+      n: "04",
+      title: "Medical Weight Loss",
+      body: "Physician-supervised weight management, built around your medical history and reviewed at every stage. Eligibility is determined at consultation.",
+      imagem: semMedia,
+      alt: "Medical weight loss consultation",
+    },
+    {
+      n: "05",
+      title: "Skin Tightening",
+      body: "Energy-based plans that address skin laxity, delivered as a course of sessions following assessment.",
+      imagem: semMedia,
+      alt: "Skin tightening treatment",
+    },
+  ],
+} as const;
+
+// ── 09 · Skin ────────────────────────────────────────────────────────────
+export const pele = {
+  id: "pele",
+  label: "Skin",
+  title: "Well-cared-for skin does not need a filter.",
+  intro: [
+    "Skin changes. Needs change. The plan should change with them.",
+    "At Ondelle, we assess your skin before we decide anything about it.",
+  ],
+  items: [
+    {
+      n: "01",
+      title: "Signature Facial",
+      body: "Deep cleansing and resurfacing to clarify, renew and revitalize the skin.",
+      imagem: "/imagens/protocolos/protocolos-limpeza-pele-profunda.jpg.jpg",
+      alt: "Deep cleansing facial",
+    },
+    {
+      n: "02",
+      title: "IPL Photofacial",
+      body: "Personalized intense pulsed light plans for tone, texture and pigmentation concerns.",
+      imagem: "/imagens/protocolos/protocolos-ipl-pele.jpg.png",
+      alt: "Intense pulsed light applied to the skin",
+    },
+    {
+      n: "03",
+      title: "Hydration Therapy",
+      body: "Targeted treatment to restore comfort, luminosity and a healthy look to the skin.",
+      imagem: "/imagens/protocolos/protocolos-hidratacao.jpg.jpg",
+      alt: "Facial hydration treatment",
+    },
+  ],
+} as const;
+
+// ── 10 · Rituals ─────────────────────────────────────────────────────────
+export const rituais = {
+  id: "rituais",
+  label: "Rituals",
+  title: "The small details are part of the experience too.",
+  intro: ["The Ondelle experience extends beyond the treatment room."],
+  kinetic: "Beauty, from the big results to the small details.",
+  items: [
+    {
+      n: "01",
+      title: "Lip Hydration",
+      body: "Hydration and conditioning for the lips.",
+      imagem: semMedia,
+      alt: "Lip hydration treatment",
+    },
+    {
+      n: "02",
+      title: "Hair Restoration",
+      body: "Scalp and hair treatment plans adjusted to each case.",
+      imagem: semMedia,
+      alt: "Hair restoration treatment",
+    },
+    {
+      n: "03",
+      title: "Massage",
+      body: "Time to slow down, with technique adapted to what the body is asking for.",
+      imagem: semMedia,
+      alt: "Massage therapy",
+    },
+  ],
+} as const;
+
+// ── 11 · Experience ──────────────────────────────────────────────────────
+export const experiencia = {
+  label: "Experience",
+  title: "Come in. Slow down.\nBe taken care of.",
+  body: ["Ondelle was designed so that every visit is more than a treatment."],
+  beats: ["A moment to stop.", "To be cared for.", "To trust.", "To leave feeling more like yourself."],
+  close: "A space where technology and care meet an experience that is genuinely personal.",
+  imagem: semMedia,
+  alt: "",
+} as const;
+
+// ── 12 · Personalized plans ──────────────────────────────────────────────
+export const protocolos = {
+  label: "Personalized Plans",
+  title: "No two treatment plans are the same.",
+  beats: ["So we start by listening.", "Then we assess.", "Only then do we decide."],
+  body: "Every Ondelle plan is built around your individual anatomy, your concerns and the outcome you are looking for.",
+  close: "Personalization is not a detail. It is the starting point.",
+  /** Discover -> Assess -> Personalize -> Treat -> Follow up */
+  jornada: ["Discover", "Assess", "Personalize", "Treat", "Follow Up"],
+} as const;
+
+// ── 13 · Natural results ─────────────────────────────────────────────────
+export const resultados = {
+  label: "Natural Results",
+  title: "The best version of you.\nStill unmistakably you.",
+  pares: [
+    { nao: "We do not chase a standard.", sim: "We look for balance." },
+    { nao: "We do not set out to transform.", sim: "We set out to enhance." },
+    { nao: "We do not do excess.", sim: "We do precision." },
+  ],
+  close: "Ondelle is advanced aesthetics with a natural view of beauty.",
+} as const;
+
+// ── 14 · Primary CTA ─────────────────────────────────────────────────────
 export const cta = {
-  label: "Marcar",
-  title: "Está na hora\nde cuidar de si.",
-  body: "Descubra o protocolo mais adequado para si através de uma avaliação personalizada.",
-  primary: "Marcar consulta",
-  secondary: "Falar pelo WhatsApp",
-  note: "Sofia Sales Clinic · Rio Tinto",
+  label: "Book",
+  title: "It is time\nto take care of you.",
+  body: "Find the right plan for you through a personalized consultation.",
+  primary: "Book a Consultation",
+  secondary: "Call the Clinic",
+  note: "Ondelle Aesthetics · Miami",
 } as const;
 
-// ── 15 · Contactos ───────────────────────────────────────────────────────
+// ── 15 · Contact ─────────────────────────────────────────────────────────
 export const contactos = {
-  label: "Contactos",
-  title: "Sofia Sales Clinic",
-  subtitle: "Clínica de Estética Avançada",
+  label: "Contact",
+  title: "Ondelle Aesthetics",
+  subtitle: "Advanced Aesthetic Medicine",
 } as const;
 
-// ── 16 · CTA final cinematográfico ───────────────────────────────────────
+// ── 16 · Cinematic closing CTA ───────────────────────────────────────────
 export const fecho = {
-  title: "A sua beleza.\nO nosso cuidado.",
-  body: "Uma experiência personalizada de estética avançada, pensada para si.",
-  cta: "Marque a sua consulta",
+  title: "Your beauty.\nOur care.",
+  body: "A personalized advanced aesthetics experience, built around you.",
+  cta: "Book your consultation",
   imagem: semMedia, // full-bleed · 16:9+
   alt: "",
 } as const;
 
-/** Frases curtas para as linhas cinéticas entre secções. */
+/** Short lines for the kinetic type between sections. */
 export const frases = [
-  "A beleza está no equilíbrio.",
-  "Precisão em cada detalhe.",
-  "Tecnologia. Conhecimento. Cuidado.",
-  "Protocolos pensados para si.",
-  "Naturalmente extraordinária.",
-  "A sua identidade. A nossa prioridade.",
-  "Onde a ciência encontra a beleza.",
-  "Menos excesso. Mais precisão.",
-  "O luxo de ser cuidada.",
-  "Beleza avançada. Resultados naturais.",
+  "Beauty lives in balance.",
+  "Precision in every detail.",
+  "Technology. Knowledge. Care.",
+  "Plans built around you.",
+  "Naturally extraordinary.",
+  "Your identity. Our priority.",
+  "Where science meets beauty.",
+  "Less excess. More precision.",
+  "The luxury of being cared for.",
+  "Advanced aesthetics. Naturally you.",
 ] as const;
 
 export const footer = {
   /**
-   * Dados públicos da clínica, tirados da página oficial dela.
-   * CONFIRMAR COM A CLIENTE antes de pôr no ar: um número de registo errado
-   * num site de saúde não é uma gralha, é um problema.
+   * This replaces the real clinic's health-authority registration numbers,
+   * which were removed along with everything else that identified them. It
+   * is the disclosure, and it is deliberately the most prominent line here.
    */
-  registos: "ERS E180231 · Licença 26560/2025",
+  registos: "Fictional brand — created as a website design demonstration. Ondelle Aesthetics is not a real clinic and does not provide medical services.",
   legal: [
-    { label: "Política de privacidade", href: "#" },
-    { label: "Livro de reclamações", href: "https://www.livroreclamacoes.pt/" },
-    { label: "Termos", href: "#" },
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms", href: "#" },
+    { label: "Accessibility", href: "#" },
   ],
 } as const;

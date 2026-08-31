@@ -93,19 +93,19 @@ export function SiteHeader() {
         {/* Todo o cabeçalho é dourado, por isso o `mix-blend-difference`
             saiu: inverteria a cor. O contraste sobre as zonas claras do
             vídeo vem de uma sombra curta e opaca. */}
-        <a href="#inicio" aria-label={`${brand.name} — início`} className="relative block">
+        <a href="#inicio" aria-label={`${brand.name} — home`} className="relative block">
           <Image
-            src="/imagens/equipa/logoefavicon.jpg.png"
+            src="/imagens/marca/ondelle-wordmark.png"
             alt={brand.name}
-            width={1536}
-            height={1024}
+            width={1330}
+            height={356}
             priority
             sizes="(min-width: 768px) 126px, 100px"
             // Sombra curta e opaca em vez de difusa: a anterior tinha 10px
             // de desfoque e lia-se como halo, o que embaciava o metal.
             // 90px e não 100 em telemóvel: dois cortes de 5% pedidos por ela
             // (100 → 95 → 90). Em computador fica nos 126px, que não foram tocados.
-            className="h-auto w-[90px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:w-[126px]"
+            className="h-auto w-[150px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:w-[200px]"
           />
         </a>
 
@@ -115,7 +115,7 @@ export function SiteHeader() {
         {/* Centrado a sério: com `justify-between`, o logótipo e o botão
             têm larguras diferentes e empurravam o menu para fora do eixo. */}
         <nav
-          aria-label="Principal"
+          aria-label="Main"
           className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex"
         >
           {nav.map((item) => (
@@ -156,7 +156,7 @@ export function SiteHeader() {
         hidden={!open}
         className={cn("gutter bg-bordo pb-8 pt-4 md:hidden", open && "block")}
       >
-        <nav aria-label="Principal (móvel)" className="flex flex-col gap-5">
+        <nav aria-label="Main (mobile)" className="flex flex-col gap-5">
           {nav.map((item) => (
             <a
               key={item.href}

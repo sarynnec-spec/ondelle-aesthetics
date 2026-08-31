@@ -1,5 +1,5 @@
 {
-  "name": "site-estetica-modelo",
+  "name": "ondelle-aesthetics",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -32,5 +32,6 @@
     "pngjs": "^7.0.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.7.3"
-  }
+  },
+  "description": "Fictional premium med spa website, built as a design demonstration."
 }

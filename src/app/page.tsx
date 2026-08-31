@@ -49,14 +49,14 @@ export default function Page() {
           a lado e atravessam o ecrã enquanto se rola. Termina antes da secção
           bordo, que volta ao vertical. As flores continuam intactas — o vento
           é do shader e não depende do scroll. */}
-      <HorizontalExperience label="Introdução" className="bg-fundo">
+      <HorizontalExperience label="Introduction" className="bg-fundo">
         <PainelHorizontal>
           {/* A cúpula sobe sobre a hero e entrega a secção seguinte. */}
           <Dome
             titulo="A beleza está no equilíbrio"
-            legendaEsq="Rio Tinto"
+            legendaEsq="Miami"
             legendaDir="Porto"
-            selo="SOFIA SALES · ESTÉTICA AVANÇADA · "
+            selo="ONDELLE · ADVANCED AESTHETICS · "
             // O recuo de topo subiu de 18vh para 26vh: é o que deixa a faixa de
             // buganvília pender do topo da secção sem chegar ao título em arco.
             className="h-full bg-fundo pt-[26vh]"
@@ -144,15 +144,6 @@ export default function Page() {
                     A unidade é `lvh` e não `svh` pela mesma razão do painel:
                     ambos têm de medir a mesma altura para a figura manter a
                     fração certa da moldura. */}
-                <div className="pointer-events-none absolute right-[var(--spacing-gutter)] bottom-0 -translate-x-[42%] translate-y-[8%] max-md:translate-x-[12.2%] max-md:translate-y-[15%]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/imagens/equipa/modeloclinica.jpg.png"
-                    alt=""
-                    aria-hidden
-                    className="h-[114svh] w-auto max-md:h-[85.5lvh]"
-                  />
-                </div>
               </>
             }
           >
@@ -195,7 +186,7 @@ export default function Page() {
         // browser descarrega-o uma vez.
         rodape={
           <div className="mt-14 md:hidden">
-            <Laminas src="/imagens/destaque/sofiasofa.jpg.png" />
+            <Laminas src="/imagens/placeholder/lamina-4x3.jpg" />
           </div>
         }
         dark
@@ -213,7 +204,7 @@ export default function Page() {
             computador e em telemóvel não existe — lá a coluna é uma só. */}
         <div className="relative">
           <div className="pointer-events-none absolute right-0 bottom-full hidden w-[50%] md:block">
-            <Laminas src="/imagens/destaque/sofiasofa.jpg.png" />
+            <Laminas src="/imagens/placeholder/lamina-4x3.jpg" />
           </div>
 
           <ol className="mb-14 grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-3 lg:grid-cols-5">
@@ -401,8 +392,8 @@ export default function Page() {
             //     meio de uma faixa baixa.
             area="aspect-[9/16] sm:aspect-[4/3] lg:aspect-square"
             className="lg:col-start-1 lg:row-start-1"
-            src="/imagens/destaque/videoclinic.mp4.mp4"
-            fundo="/imagens/destaque/videoclinic-fundo.jpg"
+            src="/imagens/video/ambient.mp4"
+            fundo="/imagens/video/ambient-poster.jpg"
           />
         </div>
       </div>
@@ -546,7 +537,7 @@ export default function Page() {
         dark
         // O lado direito estava vazio; leva a fotografia da pasta `destaque`.
         imagem={{
-          src: "/imagens/destaque/dourado.jpg.png",
+          src: "/imagens/placeholder/faixa-larga.jpg",
           alt: "",
           nua: true,
           // O ficheiro é 2203×714, ou seja muito deitado. 90deg põe-no de pé;

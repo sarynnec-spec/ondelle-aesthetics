@@ -26,22 +26,6 @@ export function Cta() {
             que esta imagem aparece (md–lg). Abaixo de `md` ela está escondida:
             a coluna é única e o texto ocupa-a toda. Em `lg` volta ao sítio,
             que aí há largura de sobra. */}
-        <div className="pointer-events-none absolute inset-y-0 right-[calc(var(--spacing-gutter)*-1)] hidden w-[42%] md:block md:-translate-x-[5%] lg:translate-x-0">
-          <Image
-            // Recorte com fundo transparente, por isso assenta sobre o bordo
-            // sem moldura. Este já traz o logótipo da Sofia Sales no ecrã —
-            // o anterior mostrava o de outra clínica.
-            src="/imagens/equipa/tabletclinic.jpg.png"
-            alt=""
-            aria-hidden
-            fill
-            sizes="42vw"
-            // Ancorada em baixo e não ao meio: centrada, a mão ficava a
-            // meia altura com bordo vazio por baixo e o cimo do tablet
-            // cortado. Encostada ao fundo da caixa, desce até à margem.
-            className="object-contain [object-position:100%_100%]"
-          />
-        </div>
 
         <p className="label mb-8 text-fundo/70">{cta.label}</p>
 
@@ -76,9 +60,7 @@ export function Cta() {
               {cta.primary}
             </a>
             <a
-              href={brand.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={brand.booking}
               className="label rounded-full border border-fundo/35 px-8 py-4 text-fundo transition-colors duration-300 hover:border-fundo hover:bg-fundo/10"
             >
               {cta.secondary}

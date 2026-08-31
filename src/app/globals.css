@@ -546,7 +546,7 @@
 /* ── Corrida horizontal em telemóvel: painel largo, proporções de computador ─
 
    O problema que isto resolve: a introdução tem o texto à esquerda e a figura
-   da Sofia à direita, e isso vive de o ecrã ser mais largo do que alto. Num
+   da figura à direita, e isso vive de o ecrã ser mais largo do que alto. Num
    telemóvel (390×844) não é. Medido: a figura, que em computador ocupa 47% da
    largura, passava a 95% e engolia a coluna de texto. Não havia arranjo que
    coubesse — o formato do ecrã não dá.
