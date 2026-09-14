@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
+import { Wordmark } from "@/components/ui/wordmark";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { brand, nav, ctaLabel } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -94,13 +94,9 @@ export function SiteHeader() {
             saiu: inverteria a cor. O contraste sobre as zonas claras do
             vídeo vem de uma sombra curta e opaca. */}
         <a href="#inicio" aria-label={`${brand.name} — home`} className="relative block">
-          <Image
-            src="/imagens/marca/ondelle-wordmark.png"
-            alt={brand.name}
-            width={1330}
-            height={356}
-            priority
-            sizes="(min-width: 768px) 126px, 100px"
+          <Wordmark
+            id="cabecalho"
+            label={brand.name}
             // Sombra curta e opaca em vez de difusa: a anterior tinha 10px
             // de desfoque e lia-se como halo, o que embaciava o metal.
             // 90px e não 100 em telemóvel: dois cortes de 5% pedidos por ela

@@ -53,9 +53,9 @@ export default function Page() {
         <PainelHorizontal>
           {/* A cúpula sobe sobre a hero e entrega a secção seguinte. */}
           <Dome
-            titulo="A beleza está no equilíbrio"
+            titulo="Understanding before treatment"
             legendaEsq="Miami"
-            legendaDir="Porto"
+            legendaDir="Design District"
             selo="ONDELLE · ADVANCED AESTHETICS · "
             // O recuo de topo subiu de 18vh para 26vh: é o que deixa a faixa de
             // buganvília pender do topo da secção sem chegar ao título em arco.
@@ -87,7 +87,12 @@ export default function Page() {
                     corrida horizontal em globals.css): `vw` mediria a janela
                     e não o painel. 67svh é a mesma fração do painel que os
                     42vw de computador — 605px em 1440. */}
-                <FloresVideo clipe="03" ancora="superior-direito" larguraMovel="67svh" />
+                {/* `z-10`: nem as flores nem a figura tinham z-index, por
+                    isso quem pintava por cima era quem vinha depois no DOM —
+                    e era a figura. Pedido dela: a buganvília à FRENTE. Vai
+                    aqui e não a baixar a figura para o `z-index` continuar a
+                    ler-se junto do elemento que ele levanta. */}
+                <FloresVideo clipe="03" ancora="superior-direito" larguraMovel="67svh" className="z-10" />
                 {/* A figura vive na DECORAÇÃO e não no conteúdo: só assim o
                     `bottom-0` se mede pela secção. Dentro do conteúdo media
                     pelo bloco de texto e parava a 196px do fim do painel — em
@@ -143,7 +148,45 @@ export default function Page() {
 
                     A unidade é `lvh` e não `svh` pela mesma razão do painel:
                     ambos têm de medir a mesma altura para a figura manter a
-                    fração certa da moldura. */}
+                    fração certa da moldura.
+
+                    ATENÇÃO AO FICHEIRO. Tudo isto foi calibrado para o
+                    recorte antigo, que tinha 14,6% de vazio à ESQUERDA e
+                    tinta até ao pixel da direita. O ficheiro atual é do mesmo
+                    tamanho (1024×1536) e também é recorte (47,8% transparente
+                    contra 41,1%), mas a margem vazia está do lado CONTRÁRIO:
+                    tinta de 0% a 97,9% em x.
+
+                    OS `translate-x` SAÍRAM TODOS. Houve um passo intermédio
+                    em que foram corrigidos em 14,6% — a diferença de tinta
+                    entre este ficheiro e o antigo — porque com os valores
+                    originais a figura atravessava o texto. Deixaram de fazer
+                    falta: ela pediu a figura ENCOSTADA ao canto direito, e
+                    `right-0` sem deslocação nenhuma faz isso diretamente, nos
+                    dois formatos. Menos números para desafinar.
+
+                    O que continua a valer de cima é o `bottom-0` com os 8% a
+                    descer (15% em telemóvel) — é o que a mantém assente em
+                    vez de a pairar. */}
+                <div className="pointer-events-none absolute right-0 bottom-0 translate-y-[8%] max-md:translate-y-[15%]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/imagens/destaque/figura-intro.png"
+                    alt=""
+                    aria-hidden
+                    // Duas passagens dela: primeiro −20% (114 → 91,2svh),
+                    // depois "aumente mantendo a posição" — daí +20% sobre
+                    // esse valor, 91,2 → 109,4svh. Telemóvel acompanha na
+                    // mesma fração: 85,5 → 68,4 → 82,1lvh.
+                    //
+                    // O tamanho é a ÚNICA coisa que mudou nas duas vezes. O
+                    // `right-0` e o `bottom-0` com os 8% a descer ficaram
+                    // sempre iguais, que é o que ela quis dizer com "mantendo
+                    // a posição": a figura cresce ancorada ao canto, não a
+                    // partir do centro.
+                    className="h-[109.4svh] w-auto max-md:h-[82.1lvh]"
+                  />
+                </div>
               </>
             }
           >
@@ -186,7 +229,7 @@ export default function Page() {
         // browser descarrega-o uma vez.
         rodape={
           <div className="mt-14 md:hidden">
-            <Laminas src="/imagens/placeholder/lamina-4x3.jpg" />
+            <Laminas src="/imagens/equipa/equipa.png" />
           </div>
         }
         dark
@@ -204,7 +247,7 @@ export default function Page() {
             computador e em telemóvel não existe — lá a coluna é uma só. */}
         <div className="relative">
           <div className="pointer-events-none absolute right-0 bottom-full hidden w-[50%] md:block">
-            <Laminas src="/imagens/placeholder/lamina-4x3.jpg" />
+            <Laminas src="/imagens/equipa/equipa.png" />
           </div>
 
           <ol className="mb-14 grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-3 lg:grid-cols-5">
@@ -227,7 +270,7 @@ export default function Page() {
           secções claras; em bordo corta o branco e marca a passagem. */}
       <div className="border-y border-bordo-linha bg-bordo py-7">
         <KineticLine
-          text="Onde a ciência encontra a beleza"
+          text="Where science meets beauty"
           className="font-display text-[clamp(2rem,6vw,5rem)] leading-none ouro-metal"
         />
       </div>
@@ -392,7 +435,7 @@ export default function Page() {
             //     meio de uma faixa baixa.
             area="aspect-[9/16] sm:aspect-[4/3] lg:aspect-square"
             className="lg:col-start-1 lg:row-start-1"
-            src="/imagens/video/ambient.mp4"
+            src="/imagens/video/ambient-hero-vertical.mp4"
             fundo="/imagens/video/ambient-poster.jpg"
           />
         </div>
@@ -537,7 +580,7 @@ export default function Page() {
         dark
         // O lado direito estava vazio; leva a fotografia da pasta `destaque`.
         imagem={{
-          src: "/imagens/placeholder/faixa-larga.jpg",
+          src: "/imagens/destaque/faixa-dourada.png",
           alt: "",
           nua: true,
           // O ficheiro é 2203×714, ou seja muito deitado. 90deg põe-no de pé;

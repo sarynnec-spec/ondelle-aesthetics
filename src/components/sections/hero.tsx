@@ -128,7 +128,7 @@ export function Hero() {
             <div className="pointer-events-none flex justify-center max-lg:-mx-gutter max-lg:-mb-section lg:absolute lg:top-[7%] lg:bottom-0 lg:right-[38%] lg:left-0 lg:block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/imagens/placeholder/hero-figura.jpg"
+                src="/imagens/destaque/figura-flor.png"
                 alt=""
                 className="h-auto w-full max-w-[26rem] object-contain object-bottom md:max-w-[30rem] lg:h-full lg:max-w-none lg:-scale-x-100 lg:[object-position:100%_100%]"              />
             </div>

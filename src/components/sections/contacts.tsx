@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { RevealText, RevealBlock } from "@/components/motion/reveal";
 import { SurfaceFill } from "@/components/ui/surface";
+import { Wordmark } from "@/components/ui/wordmark";
 import { contactos, brand, fecho, footer } from "@/lib/content";
 
 /** Blocos 15 e 16 — contactos e fecho cinematográfico. */
@@ -60,12 +61,9 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
             // grande — e não a compensação do ficheiro.
             className="-mt-[calc(var(--logo)*0.010)] -mb-[calc(var(--logo)*0.015)] -ml-[calc(var(--logo)*0.042)] [--logo:min(54.5vw,30rem)] lg:-mt-[calc(var(--logo)*0.060)] lg:mb-[calc(var(--logo)*0.055)] lg:ml-[calc(var(--logo)*0.208)] lg:[--logo:28.5rem]"
           >
-            <Image
-              src="/imagens/marca/ondelle-wordmark.png"
-              alt={contactos.title}
-              width={1330}
-              height={356}
-              sizes="(min-width: 1024px) 28.5rem, 54.5vw"
+            <Wordmark
+              id="contactos"
+              label={contactos.title}
               className="h-auto w-[var(--logo)]"
             />
           </h2>
@@ -75,7 +73,7 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
             da legenda que saiu, e sem ele o logótipo colava à linha. */}
         <div className="mt-16 grid gap-12 border-t border-texto/15 pt-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="label mb-5 text-texto-fraca">Morada</p>
+            <p className="label mb-5 text-texto-fraca">Address</p>
             <address className="not-italic leading-[1.7] text-texto">
               {brand.address.street}
               <br />
@@ -174,6 +172,26 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
               Computador e tablet ficam nos -10% de sempre — o valor é o
               mesmo, mas por caminhos diferentes: as duas media queries não se
               cruzam. */}
+          {/* Pedido dela: descer o rosto e encolhê-lo 15%. A largura desce
+              de 41,4% para 35,2% (= 41,4 × 0,85) em computador e de 42vw para
+              35,7vw em telemóvel — a mesma fração nos dois, para não ficarem
+              tamanhos diferentes conforme o ecrã.
+
+              A descida vai por `object-position` e não por deslocação: a
+              caixa ocupa a altura toda e a imagem é `contain`, por isso quem
+              manda na posição vertical é a repartição da folga. A 50% ficava
+              centrada; a 100% assenta no fundo da caixa. */}
+          <div className="pointer-events-none absolute top-[30%] right-[calc(var(--spacing-gutter)*-1)] h-[30%] w-[35.7vw] max-md:-translate-x-[10%] md:inset-y-0 md:top-0 md:h-auto md:w-[35.2%] md:-translate-x-[10%]">
+            <Image
+              src="/imagens/destaque/rosto-ouro.png"
+              alt=""
+              aria-hidden
+              fill
+              sizes="(min-width: 768px) 46vw, 62vw"
+              className="object-contain [object-position:100%_100%] md:[object-position:100%_100%]"
+            />
+          </div>
+
           <RevealText
             as="h2"
             id="fecho-titulo"
@@ -204,12 +222,9 @@ export function Contacts({ decoracao }: { decoracao?: React.ReactNode }) {
             {/* Mesmo ficheiro, em ponto pequeno. As fracções de vazio deste
                 logótipo são pequenas (1,5% / 2,3% / 4,2%), o que a 180px de
                 largura dá 2px em cima, 3px em baixo e 8px à esquerda. */}
-            <Image
-              src="/imagens/marca/ondelle-wordmark.png"
-              alt={brand.name}
-              width={1330}
-              height={356}
-              sizes="180px"
+            <Wordmark
+              id="rodape"
+              label={brand.name}
               className="-mt-[2px] -mb-[3px] -ml-[8px] h-auto w-[180px]"
             />
             <nav aria-label="Legal">

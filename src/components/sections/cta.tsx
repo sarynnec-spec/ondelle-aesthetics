@@ -25,7 +25,51 @@ export function Cta() {
         {/* O deslocamento de 5% para a esquerda vale só na faixa estreita em
             que esta imagem aparece (md–lg). Abaixo de `md` ela está escondida:
             a coluna é única e o texto ocupa-a toda. Em `lg` volta ao sítio,
-            que aí há largura de sobra. */}
+            que aí há largura de sobra.
+
+            O bloco que estes dois comentários descrevem tinha sido apagado
+            no fork e os comentários ficaram sozinhos, a explicar uma imagem
+            que não existia. Reposto com a ficha de avaliação da Ondelle —
+            gerada de raiz para esta marca, com o wordmark dela no ecrã. */}
+        {/* `right-0` e não o recuo negativo de uma goteira que aqui estava.
+            O recuo era do desenho original, onde o tablet SANGRAVA de
+            propósito pela borda direita. Medido neste ficheiro, isso cortava
+            45px a 1440 e 72px a 1920 — porque nem esta imagem nem a do
+            original têm um único pixel de vazio à direita (0,0% nas duas),
+            logo o que sai do ecrã é tablet a sério, não margem.
+
+            A pedido dela, passa a assentar na linha da goteira, alinhado com
+            a margem direita do resto do site.
+
+            Três posições foram experimentadas, e as duas primeiras falharam
+            por razões opostas:
+
+              · recuo negativo de uma goteira (o do desenho original) —
+                cortava 45px a 1440 e 72px a 1920, porque esta imagem não tem
+                um único pixel de vazio à direita (0,0%);
+              · `right-[var(--spacing-gutter)]` — não cortava nada, mas
+                afastava-a 43 a 76px da borda e as mãos ficavam a PAIRAR no
+                meio do bordo, sem nada que as segurasse.
+
+            Fica `right-0`. Um filho absoluto mede-se pela caixa de padding do
+            pai, por isso isto ignora a goteira do `.gutter` e assenta na
+            própria borda do ecrã: o tablet encosta sem perder um pixel, e as
+            mãos leem-se a entrar de fora em vez de flutuar. */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] md:block md:-translate-x-[5%] lg:translate-x-0">
+          <Image
+            // Recorte com fundo transparente (1199×1312, RGBA), por isso
+            // assenta sobre o bordo sem moldura nem fundo próprio.
+            src="/imagens/destaque/tablet-ficha.png"
+            alt=""
+            aria-hidden
+            fill
+            sizes="42vw"
+            // Ancorada em baixo e não ao meio: centrada, a mão ficava a
+            // meia altura com bordo vazio por baixo e o cimo do tablet
+            // cortado. Encostada ao fundo da caixa, desce até à margem.
+            className="object-contain [object-position:100%_100%]"
+          />
+        </div>
 
         <p className="label mb-8 text-fundo/70">{cta.label}</p>
 

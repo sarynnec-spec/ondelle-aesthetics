@@ -114,7 +114,6 @@ export const ctaLabel = "Book a Consultation";
  * clinic's logo and could not travel into a demonstration brand.
  */
 export const abertura = {
-  logo: "/imagens/marca/ondelle-wordmark.png",
 } as const;
 
 // ── 01 · Hero ────────────────────────────────────────────────────────────
@@ -170,26 +169,43 @@ export const direcaoClinica = {
   person: { name: "Dr. Camille Roux, MD", role: "Medical Director" },
   /**
    * The frame rotates between these portraits and the caption follows what
-   * is on screen. All three are `null`: the original build used photographs
-   * of a real clinician and a real team, and none of that could travel into
-   * a demonstration brand. Until generated portraits exist, the frame draws
-   * a gradient in the brand tone.
+   * is on screen. The original build used photographs of a real clinician
+   * and a real team, and none of that could travel into a demonstration
+   * brand. These replacements are generated for Ondelle — the wordmark is on
+   * the wall and on every coat, and the window shows Miami.
+   *
+   * The second portrait was cut out of a full page mockup — the file as
+   * downloaded had a navigation bar, a headline and a strip of icons sitting
+   * on top of the photograph. Cropping was the way to honour what this slot
+   * needs: the same face as the first, seen differently.
    */
   retratos: [
     {
-      src: semMedia,
+      src: "/imagens/equipa/direcao-01.png",
       alt: "Medical Director, Ondelle Aesthetics",
       nome: "Dr. Camille Roux, MD",
       papel: "Medical Director",
-      bio: "Board-certified in aesthetic medicine, with a practice built around restraint. The work she is known for is the work you cannot point to — the result that reads as rest rather than as treatment.",
+      bio: "Board-certified in aesthetic medicine, with a practice built around restraint. The work he is known for is the work you cannot point to — the result that reads as rest rather than as treatment.",
     },
     {
-      src: semMedia,
+      // Recortado da maqueta de página que ela gerou: o ficheiro original
+      // trazia barra de navegação, título e faixa de ícones por cima da
+      // fotografia. Cortado em y 100..1090 de 1672, fica só o médico —
+      // mesma cara do primeiro retrato, que é o que este lugar exige.
+      src: "/imagens/equipa/direcao-02.png",
       alt: "Medical Director, Ondelle Aesthetics",
       nome: "Dr. Camille Roux, MD",
       papel: "Medical Director",
     },
     {
+      // A equipa SAIU daqui a pedido dela. O ficheiro é 1448x1086 — 4:3
+      // deitado — e esta moldura é 4:5 de pé: entrava cortada pelos lados,
+      // com as pessoas das pontas pelo meio. Foi para a moldura 4:3 da
+      // Filosofia, que tem exatamente a proporção dela.
+      //
+      // `RetratoRotativo` filtra por `src !== null`, por isso deixá-la a
+      // `semMedia` basta para sair da rotação — não fica um lugar vazio a
+      // desenhar gradiente de três em três segundos.
       src: semMedia,
       alt: "The Ondelle team",
       nome: "The Ondelle Team",
@@ -240,8 +256,8 @@ export const medicinaEstetica = {
       n: "03",
       title: "Hyperhidrosis Treatment",
       body: "Neuromodulator treatment of the underarm area to reduce excessive sweating, following consultation.",
-      imagem: semMedia,
-      alt: "Hyperhidrosis treatment",
+      imagem: "/imagens/protocolos/hyperhidrosis.png",
+      alt: "Underarm treatment session for excessive sweating",
     },
   ],
 } as const;
@@ -298,8 +314,8 @@ export const rosto = {
     "From injectables to advanced devices, every treatment is decided one patient at a time.",
   ],
   close: "Natural results start with personalized decisions.",
-  imagem: semMedia,
-  alt: "",
+  imagem: "/imagens/destaque/rosto-principal.png",
+  alt: "A face at rest, eyes closed, framed by pale petals",
 } as const;
 
 // ── 08 · Body ────────────────────────────────────────────────────────────
@@ -335,15 +351,15 @@ export const corpo = {
       n: "04",
       title: "Medical Weight Loss",
       body: "Physician-supervised weight management, built around your medical history and reviewed at every stage. Eligibility is determined at consultation.",
-      imagem: semMedia,
-      alt: "Medical weight loss consultation",
+      imagem: "/imagens/protocolos/medical-weight-loss.jpg",
+      alt: "Body measurement during a weight management plan",
     },
     {
       n: "05",
       title: "Skin Tightening",
       body: "Energy-based plans that address skin laxity, delivered as a course of sessions following assessment.",
-      imagem: semMedia,
-      alt: "Skin tightening treatment",
+      imagem: "/imagens/protocolos/skin-tightening.jpg",
+      alt: "Body profile illustrating skin firmness",
     },
   ],
 } as const;
@@ -394,22 +410,22 @@ export const rituais = {
       n: "01",
       title: "Lip Hydration",
       body: "Hydration and conditioning for the lips.",
-      imagem: semMedia,
-      alt: "Lip hydration treatment",
+      imagem: "/imagens/protocolos/lip-hydration.jpg",
+      alt: "Close-up of lips after a hydrating gloss treatment",
     },
     {
       n: "02",
       title: "Hair Restoration",
       body: "Scalp and hair treatment plans adjusted to each case.",
-      imagem: semMedia,
-      alt: "Hair restoration treatment",
+      imagem: "/imagens/protocolos/hair-restoration.jpg",
+      alt: "Scalp treatment session for hair restoration",
     },
     {
       n: "03",
       title: "Massage",
       body: "Time to slow down, with technique adapted to what the body is asking for.",
-      imagem: semMedia,
-      alt: "Massage therapy",
+      imagem: "/imagens/protocolos/massage.png",
+      alt: "Hands performing a body massage on a treatment bed",
     },
   ],
 } as const;

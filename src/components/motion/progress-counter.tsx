@@ -177,7 +177,7 @@ export function ProgressCounter({ ids, labels }: { ids: readonly string[]; label
         recuado ? "-translate-x-3 opacity-0" : "translate-x-0 opacity-100",
       )}
     >
-      <div className="relative h-24 w-px bg-white/25">
+      <div className="relative h-24 w-px bg-white/45">
         <div
           ref={bar}
           className="absolute inset-x-0 top-0 h-full origin-top bg-white will-change-transform"
@@ -189,11 +189,11 @@ export function ProgressCounter({ ids, labels }: { ids: readonly string[]; label
           <span ref={digits} className="label inline-block text-[1.05rem] leading-none">
             {pad(index)}
           </span>
-          <span className="label text-[0.62rem] leading-none opacity-45">
+          <span className="label text-[0.62rem] leading-none opacity-80">
             / {pad(ids.length - 1)}
           </span>
         </div>
-        <div className="label mt-2 text-[0.6rem] opacity-60">{labels[index]}</div>
+        <div className="label mt-2 text-[0.6rem] opacity-85">{labels[index]}</div>
       </div>
     </div>
     </>

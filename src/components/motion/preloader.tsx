@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
-import { abertura } from "@/lib/content";
+import { abertura, brand } from "@/lib/content";
+import { Wordmark } from "@/components/ui/wordmark";
 
 /**
  * Abertura: o logótipo no portal de luz, que abre sobre o site.
@@ -425,11 +426,18 @@ export function Preloader() {
         Irmã e não filha da raiz, para poder sair no seu próprio tempo. */}
     <div ref={foto} className="fixed z-[89] overflow-hidden bg-bordo">
       <Image
-        // A mesma fotografia, mas o ficheiro grande: 1122x1402 contra os
-        // 510x647 de antes — 2,2x a resolução. Identificada por comparação
-        // de pixels e não pelo nome. Vai por `next/image`, por isso os 2MB
-        // ficam no servidor: o browser recebe a versão redimensionada.
-        src="/imagens/placeholder/retrato-4x5.jpg"
+        // Escolha dela. Substituiu a moldura de espera em degradê.
+        //
+        // ATENÇÃO À PROPORÇÃO: este ficheiro é 736x1313, ou seja 0,561 —
+        // bem mais estreito do que os 0,79 a que o vão foi alargado (ver a
+        // nota do `object-cover` em baixo). Com `cover`, o que se vê é 71%
+        // da altura da fotografia (0,561 / 0,79) e perdem-se ~14,5% em cima
+        // e outro tanto em baixo. Em cima é cabelo; em baixo é a ponta das
+        // luvas. O rosto e as seringas ficam inteiros, que é o que importa.
+        //
+        // Se algum dia se quiser a fotografia toda, o que se mexe é a
+        // proporção do VÃO em `desenhar()`, não este `object-fit`.
+        src="/imagens/destaque/abertura.jpg"
         alt=""
         aria-hidden
         fill
@@ -511,15 +519,22 @@ export function Preloader() {
       </svg>
 
       {/* O logótipo. Sem fundo, sem mistura, sem filtro e sem animação — a
-          largura e o sítio vêm do `desenhar()`, em proporção ao vão. */}
+          largura e o sítio vêm do `desenhar()`, em proporção ao vão.
+
+          Era aqui o último `ondelle-wordmark.png`: o cabeçalho, o fecho e o
+          rodapé já tinham passado ao `Wordmark` em vetor, e a abertura ficou
+          para trás por o logótipo viver dentro do preloader e não sair do
+          componente. Dava a única marca do site em ouro CHAPADO — e logo na
+          primeira coisa que se vê.
+
+          O `viewBox` do `Wordmark` é o mesmo 1330×356 do ficheiro que aqui
+          estava, por isso o `desenhar()` continua a poder mandar na largura
+          da mesma maneira: mede o vão, escreve `style.width` no `[data-logo]`
+          e a marca acompanha. */}
       <div data-logo aria-hidden className="pointer-events-none absolute w-0">
-        <img
-          src={abertura.logo}
-          alt=""
-          width={1330}
-          height={356}
-          fetchPriority="high"
-          decoding="sync"
+        <Wordmark
+          id="abertura"
+          label={brand.name}
           className="block h-auto w-full select-none"
         />
       </div>
